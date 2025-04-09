@@ -1,7 +1,7 @@
 import { makeRequest } from "@/api/make-request";
 import { EHttpMethod } from "@/types";
 
-export type AccessTokenResponse = {
+type AccessTokenResponse = {
   accessToken: string;
 };
 export type SignBody = {
@@ -9,7 +9,7 @@ export type SignBody = {
   password: string;
 };
 
-const BASE_URL = "/auth";
+const BASE_URL = "/api/auth";
 
 export const signup = async ({ email, password }: SignBody) => {
   return await makeRequest<SignBody, AccessTokenResponse>({

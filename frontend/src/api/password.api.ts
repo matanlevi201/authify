@@ -1,7 +1,7 @@
 import { makeRequest } from "@/api/make-request";
 import { EHttpMethod } from "@/types";
 
-export type AccessTokenResponse = {
+type AccessTokenResponse = {
   accessToken: string;
 };
 export type ChangePasswordBody = {
@@ -16,7 +16,7 @@ export type ResetPasswordBody = {
   password: string;
 };
 
-const BASE_URL = "/password";
+const BASE_URL = "/api/password";
 
 export const changePassword = async ({
   currentPassword,

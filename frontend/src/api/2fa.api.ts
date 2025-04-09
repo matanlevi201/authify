@@ -1,7 +1,7 @@
 import { makeRequest } from "@/api/make-request";
 import { EHttpMethod } from "@/types";
 
-export type AccessTokenResponse = {
+type AccessTokenResponse = {
   accessToken: string;
 };
 export type Generate2faQrResponse = {
@@ -12,7 +12,7 @@ export type TFAToken = {
   token: string;
 };
 
-const BASE_URL = "/2fa";
+const BASE_URL = "/api/2fa";
 
 export const generate2faQr = async () => {
   return await makeRequest<never, Generate2faQrResponse>({
