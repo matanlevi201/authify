@@ -49,10 +49,10 @@ export function UserAvatar() {
         <DropdownMenuItem
           disabled={currentUser?.isOauth2User}
           onClick={
-            currentUser?.is2FAVerified ? openDisableModal : openEnableModal
+            currentUser?.is2FAEnabled ? openDisableModal : openEnableModal
           }
         >
-          {currentUser?.is2FAVerified ? "Disable 2FA" : "Enable 2FA"}
+          {currentUser?.is2FAEnabled ? "Disable 2FA" : "Enable 2FA"}
           <DropdownMenuShortcut className="size-4">
             <ShieldCheckIcon className="w-full h-full" />
           </DropdownMenuShortcut>

@@ -34,15 +34,17 @@ app.use(cookieParser());
 app.use(currentUser);
 
 app.use(express.static(path.join(__dirname, "..", "../../frontend/dist")));
-app.get("/*", (_, res) => {
-  res.sendFile(path.resolve(__dirname, "..", "../../frontend/dist/index.html"));
-});
+
 app.use("/api/2fa", twoFactorRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/password", passwordRouter);
 
 app.all("/api/*", async () => {
   throw new NotFoundError();
+});
+
+app.get("/*", (_, res) => {
+  res.sendFile(path.resolve(__dirname, "..", "../../frontend/dist/index.html"));
 });
 
 app.use(errorHandler);
