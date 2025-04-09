@@ -40,7 +40,7 @@ export const env = (() => {
     console.log("im not in test mode");
     return envSchemaProd.parse(process.env);
   } catch (error) {
-    console.group(error);
+    console.log(error);
     if (error instanceof ZodError) {
       console.error("Invalid environment variables:", error.format());
     }
