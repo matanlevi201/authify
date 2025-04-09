@@ -1,6 +1,6 @@
 import { z, ZodError } from "zod";
 
-const envSchema = z.object({
+const envSchemaProd = z.object({
   PORT: z.string().default("3000"),
   DATABASE_URL: z.string().url(),
   CLIENT_URL: z.string().url(),
@@ -21,9 +21,23 @@ const envSchema = z.object({
   RENDER_URL: z.string(),
 });
 
+const envSchemaTest = z.object({
+  CLIENT_URL: z.string().url(),
+  ACCESS_JWT_KEY: z.string().min(32),
+  REFRESH_JWT_KEY: z.string().min(32),
+  RESET_JWT_KEY: z.string().min(32),
+  TEMP_2FA_JWT_KEY: z.string().min(32),
+  NODE_ENV: z
+    .enum(["development", "production", "test"])
+    .default("development"),
+});
+
 export const env = (() => {
   try {
-    return envSchema.parse(process.env);
+    if (process.env.NODE_ENV === "test") {
+      return envSchemaTest.parse(process.env);
+    }
+    return envSchemaProd.parse(process.env);
   } catch (error) {
     if (error instanceof ZodError) {
       console.error("Invalid environment variables:", error.format());
