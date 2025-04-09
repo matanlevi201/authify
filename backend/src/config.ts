@@ -27,6 +27,9 @@ const envSchemaTest = z.object({
   REFRESH_JWT_KEY: z.string().min(32),
   RESET_JWT_KEY: z.string().min(32),
   TEMP_2FA_JWT_KEY: z.string().min(32),
+  GCP_CLIENT_ID: z.string().min(32),
+  GCP_CLIENT_SECRET: z.string().min(32),
+  GPC_CALLBACK_URL: z.string().url(),
   NODE_ENV: z
     .enum(["development", "production", "test"])
     .default("development"),
