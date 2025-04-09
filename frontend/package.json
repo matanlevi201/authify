@@ -43,7 +43,6 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
-    "common": "C:/Users/97252/Desktop/matanlevi202/auth-common/dist",
     "@eslint/js": "^9.17.0",
     "@types/node": "^22.10.7",
     "@types/react": "^18.3.18",

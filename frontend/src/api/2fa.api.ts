@@ -1,12 +1,16 @@
-import {
-  TFAToken,
-  Generate2faQrResponse,
-  Enable2faResponse,
-  Verify2faResponse,
-  Disable2faResponse,
-} from "common";
 import { makeRequest } from "@/api/make-request";
 import { EHttpMethod } from "@/types";
+
+export type AccessTokenResponse = {
+  accessToken: string;
+};
+export type Generate2faQrResponse = {
+  secret: string;
+  qr: string;
+};
+export type TFAToken = {
+  token: string;
+};
 
 const BASE_URL = "/2fa";
 
@@ -18,7 +22,7 @@ export const generate2faQr = async () => {
 };
 
 export const enable2fa = async (token: string) => {
-  return await makeRequest<TFAToken, Enable2faResponse>({
+  return await makeRequest<TFAToken, AccessTokenResponse>({
     method: EHttpMethod.POST,
     url: BASE_URL,
     body: { token },
@@ -26,7 +30,7 @@ export const enable2fa = async (token: string) => {
 };
 
 export const verify2fa = async (token: string) => {
-  return await makeRequest<TFAToken, Verify2faResponse>({
+  return await makeRequest<TFAToken, AccessTokenResponse>({
     method: EHttpMethod.POST,
     url: `${BASE_URL}/verify`,
     body: { token },
@@ -34,7 +38,7 @@ export const verify2fa = async (token: string) => {
 };
 
 export const disable2fa = async (token: string) => {
-  return await makeRequest<TFAToken, Disable2faResponse>({
+  return await makeRequest<TFAToken, AccessTokenResponse>({
     method: EHttpMethod.DELETE,
     url: BASE_URL,
     body: { token },

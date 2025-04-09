@@ -1,7 +1,13 @@
 import { Tokens } from "@/lib/utils";
-import { CurrentUser } from "common";
 import { create } from "zustand";
 
+type CurrentUser = {
+  id: number;
+  email: string;
+  is2FAEnabled: boolean;
+  is2FAVerified: boolean;
+  isOauth2User: boolean;
+};
 interface SessionState {
   accessToken: string | null;
   currentUser: CurrentUser | null;

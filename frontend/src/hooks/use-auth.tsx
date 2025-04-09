@@ -8,7 +8,11 @@ import {
 import { useSessionStore } from "@/context/use-session-store";
 import { Notifications } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
-import { SignBody } from "common";
+
+type SignBody = {
+  email: string;
+  password: string;
+};
 
 export interface UseAuth {
   signup: ({ email, password }: SignBody) => Promise<void>;

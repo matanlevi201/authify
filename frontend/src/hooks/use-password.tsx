@@ -2,12 +2,10 @@ import {
   changePassword as ApiChangePassword,
   forgotPassword as ApiForgotPassword,
   resetPassword as ApiResetPassword,
-} from "@/api";
-import {
   ChangePasswordBody,
   ForgotPasswordBody,
   ResetPasswordBody,
-} from "common";
+} from "@/api";
 import { Notifications } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 
