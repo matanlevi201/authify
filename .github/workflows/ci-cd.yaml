@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env: # declare secrets here
       PORT: ${{ secrets.PORT }}
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}?sslmode=require
       EMAIL_SERVICE: ${{ secrets.EMAIL_SERVICE }}
       COURIER_AUTH_TOKEN: ${{ secrets.COURIER_AUTH_TOKEN }}
       COURIER_DOMAIN: ${{ secrets.COURIER_DOMAIN }}
