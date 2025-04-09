@@ -12,6 +12,7 @@ import { logger } from "./utils";
 import { app } from "./app";
 import { Pool } from "pg";
 import { env } from "./config";
+import { getCurrentSchema } from "../tests/integration/export-schema";
 
 const low = async () => {
   try {
@@ -42,6 +43,7 @@ const high = async () => {
         rejectUnauthorized: false,
       },
     });
+    await pool.query(await getCurrentSchema());
     await container.get<IDatabaseService>(TYPES.IDatabaseService).connect(pool);
   } catch (error) {
     logger.error(error.message);

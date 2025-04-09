@@ -1,6 +1,12 @@
 import { relations } from "drizzle-orm";
 import { integer } from "drizzle-orm/pg-core";
-import { pgTable, serial, varchar, boolean, timestamp } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  serial,
+  varchar,
+  boolean,
+  timestamp,
+} from "drizzle-orm/pg-core";
 
 export const userTable = pgTable("users", {
   id: serial("id").primaryKey(),
@@ -24,7 +30,7 @@ export const emailTable = pgTable("emails", {
 
 export const blacklistTable = pgTable("blacklist", {
   id: serial("id").primaryKey(),
-  token: varchar("token", { length: 255 }),
+  token: varchar("token", { length: 300 }),
 });
 
 export const userRelations = relations(userTable, ({ many }) => ({
