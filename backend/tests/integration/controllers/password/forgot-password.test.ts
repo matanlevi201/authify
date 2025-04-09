@@ -1,13 +1,21 @@
 import request from "supertest";
-import { IEmailRepository, IEmailService, IUserRepository, TYPES } from "../../../../src/types";
+import {
+  IEmailRepository,
+  IEmailService,
+  IUserRepository,
+  TYPES,
+} from "../../../../src/types";
 import { container } from "../../../../inversify.config";
 import { app } from "../../../../src/app";
 
-const BASE_URL = "/password";
+const BASE_URL = "/api/password";
 
 describe(`POST ${BASE_URL}/reset`, () => {
   it("returns 404 when user not found", async () => {
-    await request(app).post(`${BASE_URL}/reset`).send({ email: "test@test.com" }).expect(404);
+    await request(app)
+      .post(`${BASE_URL}/reset`)
+      .send({ email: "test@test.com" })
+      .expect(404);
   });
 
   it("return 502 when email failed to send", async () => {
@@ -18,7 +26,9 @@ describe(`POST ${BASE_URL}/reset`, () => {
     } catch (error) {
       // Expected error: failed email service on purpose
     }
-    const userRepository = container.get<IUserRepository>(TYPES.IUserRepository);
+    const userRepository = container.get<IUserRepository>(
+      TYPES.IUserRepository
+    );
     const user = await userRepository.create({
       email: "test@test.com",
       password: "123456789",
@@ -43,8 +53,12 @@ describe(`POST ${BASE_URL}/reset`, () => {
   it("return 201 when reset email was sent to user", async () => {
     const emailService = container.get<IEmailService>(TYPES.IEmailService);
     await emailService.init();
-    const userRepository = container.get<IUserRepository>(TYPES.IUserRepository);
-    const emailRepository = container.get<IEmailRepository>(TYPES.IEmailRepository);
+    const userRepository = container.get<IUserRepository>(
+      TYPES.IUserRepository
+    );
+    const emailRepository = container.get<IEmailRepository>(
+      TYPES.IEmailRepository
+    );
     const userPayload = {
       email: "matan.levi.404@gmail.com",
       password: "123456789",

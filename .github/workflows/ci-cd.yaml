@@ -1,0 +1,69 @@
+name: Test and Deploy
+
+on:
+  push:
+    branches:
+      - main # Adjust this to the branch you're using for deployment, e.g., 'main'
+
+jobs:
+  test_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16" # Adjust the version according to your app
+
+      # Install dependencies for backend and frontend
+      - name: Install backend dependencies
+        run: |
+          cd backend
+          npm install
+
+      # Run backend unit tests
+      - name: Run unit tests
+        run: |
+          cd backend
+          npm run test:unit
+
+      # Check if backend tests pass
+      - name: Check backend tests result
+        if: success()
+        run: echo "Backend tests passed"
+
+      # Run integration tests
+      - name: Run integration tests
+        run: |
+          cd backend
+          npm run test:integration
+
+      # Check if integration tests pass
+      - name: Check integration tests result
+        if: success()
+        run: echo "Integration tests passed"
+
+      - name: Install and build frontend and backend
+        if: success()
+        run: |
+          # Backend build (if applicable)
+          cd backend
+          npm install
+          npm run build
+
+      # Deploy to Render if everything is successful
+      - name: Deploy to Render
+        if: success()
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: |
+          curl -X POST \
+          -H "Authorization: Bearer $RENDER_API_KEY" \
+          -H "Content-Type: application/json" \
+          -d '{"serviceId": "srv-cvr527uuk2gs73c8tpmg"}' \
+          https://api.render.com/v1/services/srv-cvr527uuk2gs73c8tpmg/deploys
