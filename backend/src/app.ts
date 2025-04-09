@@ -5,6 +5,7 @@ import { NotFoundError } from "./errors";
 import expressJSDocSwagger from "express-jsdoc-swagger";
 import { options } from "../docs/options";
 import { env } from "./config";
+import path from "path";
 
 import { errorHandler } from "./middlewares";
 import { twoFactorRouter } from "./routes/2fa.routes";
@@ -31,6 +32,11 @@ if (env.NODE_ENV !== "test") {
 }
 app.use(cookieParser());
 app.use(currentUser);
+
+app.use(express.static(path.join(__dirname, "../../frontend/dist")));
+app.get("/", (_, res) => {
+  res.sendFile(path.resolve(__dirname, "../../frontend/dist/index.html"));
+});
 app.use("/2fa", twoFactorRouter);
 app.use("/auth", authRouter);
 app.use("/password", passwordRouter);

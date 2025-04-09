@@ -1,5 +1,12 @@
 import "dotenv/config";
-import { IBlacklistRepository, IDatabaseService, IEmailRepository, IEmailService, IUserRepository, TYPES } from "./types/index";
+import {
+  IBlacklistRepository,
+  IDatabaseService,
+  IEmailRepository,
+  IEmailService,
+  IUserRepository,
+  TYPES,
+} from "./types/index";
 import { bootstrap, container } from "../inversify.config";
 import { logger } from "./utils";
 import { app } from "./app";
@@ -30,6 +37,10 @@ const high = async () => {
       connectionString: env.DATABASE_URL,
       idleTimeoutMillis: 5000,
       max: 5,
+      ssl: {
+        // for Render's self-signed cert, only for educational and skill showcase purposes
+        rejectUnauthorized: false,
+      },
     });
     await container.get<IDatabaseService>(TYPES.IDatabaseService).connect(pool);
   } catch (error) {

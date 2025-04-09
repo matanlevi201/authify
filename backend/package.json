@@ -4,14 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "dev": "tsx watch src/index.ts",
+    "start": "node build/src/index.js",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "test:watch": "jest --watchAll --no-cache",
     "test:unit": "jest --no-cache --config=jest/unit.config.js",
     "test:integration": "jest --no-cache --config=jest/integration.config.js",
     "test:e2e": "jest --no-cache --config=jest.e2e.config.ts",
-    "test:clear": "jest --clearCache"
+    "test:clear": "jest --clearCache",
+    "postinstall": "cd ../frontend && npm install && npm run build"
   },
   "keywords": [],
   "author": "",
