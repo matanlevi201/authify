@@ -1,3 +1,8 @@
+CREATE TABLE "blacklist" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"token" varchar(300)
+);
+--> statement-breakpoint
 CREATE TABLE "emails" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"userId" integer NOT NULL,

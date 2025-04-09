@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env: # declare secrets here
       PORT: ${{ secrets.PORT }}
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}?sslmode=require
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
       EMAIL_SERVICE: ${{ secrets.EMAIL_SERVICE }}
       COURIER_AUTH_TOKEN: ${{ secrets.COURIER_AUTH_TOKEN }}
       COURIER_DOMAIN: ${{ secrets.COURIER_DOMAIN }}
@@ -63,18 +63,6 @@ jobs:
       - name: Check integration tests result
         if: success()
         run: echo "Integration tests passed"
-
-      - name: Generate db migration
-        if: success()
-        run: |
-          cd backend
-          npm run db:generate
-
-      - name: Migrate db
-        if: success()
-        run: |
-          cd backend
-          npm run db:migrate
 
       - name: Install and build frontend and backend
         if: success()
