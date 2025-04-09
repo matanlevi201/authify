@@ -64,8 +64,8 @@ const start = async () => {
       return;
     }
     if (env.NODE_ENV === "production") {
-      logger.info(`[Docs]: ${env.RENDER_URL}/api-docs`);
-      logger.info(`[Server]: App running! Available at: ${env.RENDER_URL}`);
+      logger.info(`[Docs]: ${env.CLIENT_URL}/api-docs`);
+      logger.info(`[Server]: App running! Available at: ${env.CLIENT_URL}`);
       return;
     }
   });

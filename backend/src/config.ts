@@ -18,6 +18,7 @@ const envSchema = z.object({
   NODE_ENV: z
     .enum(["development", "production", "test"])
     .default("development"),
+  RENDER_DEPLOY_HOOK: z.string(),
 });
 
 export const env = (() => {
