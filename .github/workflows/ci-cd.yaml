@@ -64,6 +64,18 @@ jobs:
         if: success()
         run: echo "Integration tests passed"
 
+      - name: Generate db migration
+        if: success()
+        run: |
+          cd backend
+          npm run db:generate
+
+      - name: Migrate db
+        if: success()
+        run: |
+          cd backend
+          npm run db:migrate
+
       - name: Install and build frontend and backend
         if: success()
         run: |
