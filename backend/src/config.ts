@@ -37,7 +37,7 @@ const envSchemaTest = z.object({
   RENDER_DEPLOY_HOOK: z.string(),
 });
 
-export const env = (async () => {
+export const env = (() => {
   try {
     if (process.env.NODE_ENV === "test") {
       return envSchemaTest.parse(process.env);
@@ -47,8 +47,6 @@ export const env = (async () => {
     if (error instanceof ZodError) {
       console.error("Invalid environment variables:", error.format());
     }
-    console.error("ENV VALIDATION ERROR:", error);
-    await new Promise((resolve) => setTimeout(resolve, 100)); // ensure logs flush
     process.exit(1);
   }
 })();

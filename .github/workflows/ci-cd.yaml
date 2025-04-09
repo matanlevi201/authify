@@ -15,6 +15,10 @@ jobs:
       RESET_JWT_KEY: ${{ secrets.RESET_JWT_KEY }}
       TEMP_2FA_JWT_KEY: ${{ secrets.TEMP_2FA_JWT_KEY }}
       RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+      RESET_PASSWORD_TEMPLATE_ID: ${{ secrets.RESET_PASSWORD_TEMPLATE_ID }}
+      GCP_CLIENT_ID: ${{ secrets.GCP_CLIENT_ID }}
+      GCP_CLIENT_SECRET: ${{ secrets.GCP_CLIENT_SECRET }}
+      GPC_CALLBACK_URL: ${{ secrets.GPC_CALLBACK_URL }}
 
     steps:
       # Checkout code
