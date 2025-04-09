@@ -72,7 +72,7 @@ jobs:
           npm install
           npm run build
 
-      # Deploy to Render if everything is successful
+      # Deploy to Render if everything is successfull
       - name: Deploy to Render
         if: success()
         env:
