@@ -42,5 +42,5 @@ export const refreshToken = async () => {
 };
 
 export const googleSignup = async () => {
-  window.location.href = "http://localhost:3000/auth/oauth/google";
+  window.location.href = `${window.location.origin}/api/auth/oauth/google`;
 };
