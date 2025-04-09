@@ -8,6 +8,10 @@ export default defineConfig({
   out: "./src/database/migrations",
   dbCredentials: {
     url: process.env.DATABASE_URL,
+    ssl: {
+      // for Render's self-signed cert, only for educational and skill showcase purposes
+      rejectUnauthorized: false,
+    },
   },
   dialect: "postgresql",
 });
