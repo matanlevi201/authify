@@ -58,8 +58,16 @@ const start = async () => {
   bootstrap();
   await initDependencies();
   app.listen(env.PORT, () => {
-    logger.info(`[Docs]: http://localhost:${env.PORT}/api-docs`);
-    logger.info(`[Server]: listening on port: ${env.PORT}`);
+    if (env.NODE_ENV === "development") {
+      logger.info(`[Docs]: http://localhost:${env.PORT}/api-docs`);
+      logger.info(`[Server]: listening on port: ${env.PORT}`);
+      return;
+    }
+    if (env.NODE_ENV === "production") {
+      logger.info(`[Docs]: ${env.RENDER_URL}/api-docs`);
+      logger.info(`[Server]: App running! Available at: ${env.RENDER_URL}`);
+      return;
+    }
   });
 };
 
